@@ -1,16 +1,65 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-	<link rel="stylesheet" href="styles.css">
+	<title>MyBookList</title>
+	<!-- Include bootstrap CSS for styling -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+	<div class="container">
+		<!-- Add heading -->
+		<h1>MyBookList</h1>
+		<!-- Add form group with input tags and submit button -->
+		<div class="form-group">
+			<label for="title">Title:</label>
+			<input type="text" class="form-control" id="title" placeholder="Enter title">
+			<label for="author">Author:</label>
+			<input type="text" class="form-control" id="author" placeholder="Enter author">
+			<label for="isbn">ISBN:</label>
+			<input type="text" class="form-control" id="isbn" placeholder="Enter ISBN number">
+			<button type="submit" class="btn btn-primary" id="submit">Submit</button>
+		</div>
+		<!-- Add table to show added books -->
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Author</th>
+					<th>ISBN#</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody id="book-list">
+			</tbody>
+		</table>
+	</div>
 
+	<!-- Include JQuery and bootstrap JS for interactivity -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	
+	<!-- Add script to handle form submission and table update -->
+	<script>
+		$(document).ready(function() {
+			// Handle form submission
+			$("#submit").click(function() {
+				// Get input values
+				var title = $("#title").val();
+				var author = $("#author").val();
+				var isbn = $("#isbn").val();
+				// Append new row to table
+				$("#book-list").append("<tr><td>" + title + "</td><td>" + author + "</td><td>" + isbn + "</td><td><button class='btn btn-danger delete'>Delete</button></td></tr>");
+				// Clear input fields
+				$("#title").val("");
+				$("#author").val("");
+				$("#isbn").val("");
+			});
+
+			// Handle delete button click
+			$("#book-list").on("click", ".delete", function() {
+				$(this).closest("tr").remove();
+			});
+		});
+	</script>
 </body>
-
 </html>
